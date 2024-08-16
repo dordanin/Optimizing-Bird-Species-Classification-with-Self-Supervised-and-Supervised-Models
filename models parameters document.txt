@@ -1,0 +1,37 @@
+﻿DINOv2 : 
+The following sets of parameters were used to create the models:
+
+
+* Learning rate of 2.5e-4, batch size of 256, no augmentations with full precision.
+* Learning rate of 2.5e-4, batch size of 128, kornia augmentations, and automatic mixed precision.
+* Learning rate of 2.5e-4, batch size of 256, dropout rate of 0.3, no augmentations, and automatic mixed precision.
+* Learning rate of 2.5e-4, batch size of 64, dropout rate of 0.3, kornia augmentations, and automatic mixed precision.
+* Learning rate of 5e-4, batch size of 128, no augmentations, and automatic mixed precision.
+* Learning rate of 5e-4, batch size of 128,  kornia augmentations, and automatic mixed precision.
+The kornia augmentations used were:
+* RandomRotation of up to 45 degrees with a probability of 0.3.
+* RandomHorizantalFlip with a probability of 0.3.
+* RandomVerticalFlip with a probability of 0.3.
+* RandomAffine of up to 30 degrees with a probability of 0.3.
+YOLOv8 : 
+The following sets of parameters were used to create the models:
+* Default learning rate and momentum, batch size of 32, no augmentations, and automatic mixed precision using the YOLOv8n-cls model.
+* Default learning rate and momentum, batch size of 32, default augmentations, and automatic mixed precision using the YOLOv8n-cls model.
+* Default learning rate and momentum, batch size of 32, manual augmentations, and automatic mixed precision using the YOLOv8n-cls model.
+* Default learning rate and momentum, batch size of 32, no augmentations, dropout of 0.3, and automatic mixed precision using the YOLOv8n-cls model.
+* Default learning rate and momentum, batch size of 32, default augmentations, dropout of 0.3, and automatic mixed precision using the YOLOv8n-cls model.
+* Default learning rate and momentum, batch size of 32, no augmentations, and automatic mixed precision using the YOLOv8l-cls model.
+* Default learning rate and momentum, batch size of 32, default augmentations, and automatic mixed precision using the YOLOv8l-cls model.
+* Default learning rate and momentum, batch size of 32, manual augmentations, and automatic mixed precision using the YOLOv8l-cls model.
+The default set of augmentations includes: 
+* hsv_h=0.015, which controls the amount of hue adjustment in HSV (Hue, Saturation, Value) color space, which controls the saturation change in the image.
+* hsv_s=0.7, controls the saturation change in the image
+* hsv_v=0.4, adjusts the brightness of the image.
+* translate=0.1, randomly translates the image horizontally and/or vertically by a fraction of the image size.
+* scale=0.5, randomly zooms in or out.
+* fliplr=0.5, flip image horizontally.
+* erasing=0.4, randomly erases patches of the image.
+The manual set of augmentations includes:
+* hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, translate=0.1, scale=0.5, and fliplr=0.5 from the default augmentations list
+* degrees=45, rotates the image by a random degree.
+* perspective=0.3, alters the image as if viewed from a different angle.
