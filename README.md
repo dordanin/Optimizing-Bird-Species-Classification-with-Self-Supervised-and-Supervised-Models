@@ -33,6 +33,34 @@ Each one of the models was trained with one of the following optimizers: SGD, Ad
 The sets of parameters were used to create DINMOv2 and YOLOv8 models appear in the models parameters document.txt file 
 
 # Results
+## DINOv2 Results
+DINOv2 learning rate =  2.5e-4  
+* Schedule-free AdamW: Achieved >99% accuracy, outperforming all other optimizers.
+* SGD: Requires higher learning rates for improved accuracy. For example:
+  * Without augmentation: 1e-4 → 2.32% accuracy
+  * With augmentation: 2.5e-4 → 20.91%
+  * Schedule-free SGD: Best results with learning rates of 1e-3 and augmentation (73.49%).
+
+![image](https://github.com/user-attachments/assets/cd73df2c-73a1-4100-8d57-32ab54551f12)
+
+  
+DINOv2 learning rate =  2.5e-4 with dropout = 0.3 
+ * Dropout: Slight positive effect on accuracy; results consistent with first figure
+   
+![image](https://github.com/user-attachments/assets/99a92d59-0f38-41c9-aed8-c7b2d30f951f)
+
+   
+DINOv2 learning rate =  5e-4 
+ * Increased Learning Rate: Higher learning rates (5e-4) reduced accuracy
+   
+![image](https://github.com/user-attachments/assets/327b74f1-b71a-4628-9711-eddeeb9a7ed3)
+
+Summary:
+ * Best Performance: Schedule-free AdamW with >99% validation accuracy.
+ * Effectiveness of AMP and Augmentations: Limited impact.
+ * Overall Performance: Most models achieved 95%+ validation accuracy
+
+
 
 # Conclusions
 
