@@ -32,5 +32,45 @@ Each one of the models was trained with one of the following optimizers: SGD, Ad
 
 The sets of parameters were used to create DINMOv2 and YOLOv8 models appear in the models parameters document.txt file 
 
+# Results
+
+# Conclusions
+
+# How to run
+1) Download the data set: https://www.kaggle.com/datasets/gpiosenka/100-bird-species/data
+2) Download the python files from this page
+3) Add the location of the train , test and val folders that you download in 1 to train_set , val_set and test_set parameters in the code
+4) Run the the python files , this will train all the models combinations
+
+To use the best weights we found, you can download the weights file on this page and use it according the instructions:
+
+For using YOLOv8 model, run:
+
+`!pip install ultralytics`
+
+`from ultralytics import YOLO`
+
+`model = YOLO("yolov8n-cls.pt")  # load an official model`
+
+`model = YOLO("path/to/best.pt")  # load our custom model`
+
+`results = model("your_image.jpg")  # predict on an image`
+
+ Using DINOv2 model : use the python file "" provide in this page 
+
+# Ethics Statement
+The explanations of ChatGPT:
+
+stakeholders that will be affected by the project:
+* Data Scientists/Researchers - who are developing and testing models for fine-grained image classification.
+* Conservationists/Bird Enthusiasts - who are interested in species identification for conservation or ecological research.
+* Technology Companies - that can integrate this classification technology into applications such as wildlife monitoring or mobile applications.
+  
+The explanation that is given to each stakeholder:
+* Data Scientists/Researchers: This project explores the effectiveness of self-supervised models like DINOv2 and supervised models like YOLOv8 for bird species classification, offering insights into the performance of various optimizers. These findings can help guide the selection of model architectures and optimizers for future classification tasks.
+* Conservationists/Bird Enthusiasts: This technology allows accurate identification of bird species, even those that look similar, by training AI models on a large dataset of bird images. It could assist in ecological research and help track bird populations for conservation efforts.
+* Technology Companies: The models developed in this project could be used to improve wildlife tracking and monitoring systems or be integrated into consumer-facing applications like mobile apps for bird watching, offering accurate, real-time species identification.
+
+ChatGPT explanations should emphasize the ethical considerations of AI use, particularly the potential biases in training data. For example, when explaining the project to stakeholders, it’s important to note that the dataset might not cover all species equally, potentially resulting in biased or incomplete identification results. It’s also crucial to ensure that the technology is used responsibly, especially in conservation and wildlife monitoring, to avoid harm to ecosystems or misinterpretation of results. Transparency around limitations should be included to ensure ethical use.
 
 
