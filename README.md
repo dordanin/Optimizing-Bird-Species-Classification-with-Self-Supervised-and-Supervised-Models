@@ -61,9 +61,29 @@ Summary:
  * Overall Performance: Most models achieved 95%+ validation accuracy
 
 ## YOLOv8  Results
+* SGD Optimizer: Best performance across all parameter sets on this dataset.
+* YOLOv8l-cls vs YOLOv8n-cls did not outperform except when using SGD.
+* RMSProp:
+  * Performed poorly, with a maximum validation accuracy of only 43.6%.
+  * Most models failed to exceed 1% accuracy, even with 12 additional attempts.
+  * Likely unsuitable for YOLO or a possible implementation issue. 
+* Augmentations:		
+  * Models without augmentations performed better than those with.
+  * Default augmentations in YOLO reduced accuracy due to image erasure.
+    
+![image](https://github.com/user-attachments/assets/0aa87eb2-9c4e-464b-9f54-91cb9b62091d)
+![image](https://github.com/user-attachments/assets/395f5113-4ef3-4103-b6fc-4126cb1fa05c)
+![image](https://github.com/user-attachments/assets/313323f2-5b69-45cb-ab4e-06ae0727cf43)
 
 
 # Conclusions
+DINOv2, a self-supervised learning model, achieved outstanding results, with the Schedule-free AdamW optimizer leading to a final accuracy exceeding 99%. This highlights the potential of self-supervised models in tasks requiring intricate feature extraction. The YOLOv8 model, while traditionally optimized for object detection, was fine-tuned for classification in this project. The model performed well using SGD as the optimizer, though it did not reach the accuracy levels achieved by DINOv2.
+
+Our findings demonstrated the significant impact of augmentation techniques on the YOLOv8 model, where custom augmentations outperformed default settings. However, augmentation did not influence the performance of DINOv2 as strongly, likely due to its robust pre-training process. We also found that certain augmentations, such as erasing, could adversely affect the model by removing critical features from the images, especially for tasks requiring fine-grained detail.
+
+In future work, further exploration into the performance of additional optimizers for YOLOv8 could provide more insights. Additionally, the inclusion of other self-supervised learning models, or hybrid methods combining both self-supervised and supervised learning techniques, could yield even more promising results for fine-grained classification.
+
+Overall, this study underscores the strengths of both DINOv2 and YOLOv8, while also highlighting the importance of tailoring training strategies to specific model architectures and tasks.
 
 # How to run
 1) Download the data set: https://www.kaggle.com/datasets/gpiosenka/100-bird-species/data
