@@ -60,19 +60,19 @@ The following sets of parameters were used to create the models:
 ## DINOv2 Results
 DINOv2 learning rate =  2.5e-4  
 
-![image](https://github.com/dordanin/.../assets/DINOV2_lr=2.5e-4.png)
+![image](https://github.com/dordanin/assets/DINOV2_lr=2.5e-4.png)
 
   
 DINOv2 learning rate =  2.5e-4 with dropout = 0.3 
  * Dropout: Slight negative effect on accuracy; results consistent with first figure
    
-![image](https://github.com/dordanin/.../assets/DINOV2_lr=2.5e-4_dropout.png)
+![image](https://github.com/dordanin/assets/DINOV2_lr=2.5e-4_dropout.png)
 
    
 DINOv2 learning rate =  5e-4 
  * Increased Learning Rate: Higher learning rates (5e-4) reduced accuracy
    
-![image](https://github.com/dordanin/.../assets/DINOV2_lr=5e-4.png)
+![image](https://github.com/dordanin/assets/DINOV2_lr=5e-4.png)
 
 Summary:
  * Best Performance: Schedule-free AdamW with >99% validation accuracy.
@@ -90,9 +90,9 @@ Summary:
   * Models without augmentations performed better than those with.
   * Default augmentations in YOLO reduced accuracy due to image erasure.
     
-![image](https://github.com/dordanin/.../assets/YOLOv8n-cls.png)
-![image](https://github.com/dordanin/.../assets/YOLOv8n-cls_dropout.png)
-![image](https://github.com/dordanin/.../assets/YOLOv8l-cls.png)
+![image](https://github.com/dordanin/assets/YOLOv8n-cls.png)
+![image](https://github.com/dordanin/assets/YOLOv8n-cls_dropout.png)
+![image](https://github.com/dordanin/assets/YOLOv8l-cls.png)
 
 
 # Conclusions
