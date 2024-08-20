@@ -66,7 +66,7 @@ DINOv2 learning rate =  2.5e-4 with dropout = 0.3
  * Dropout: Slight negative effect on accuracy; results consistent with first figure
    
 
-<img src="assets/DINOV2_lr=2.5e-4_dropout" width="600">
+<img src="assets/DINOV2_lr=2.5e-4_with_dropout_rate=0.3.png" width="600">
    
 DINOv2 learning rate =  5e-4 
  * Increased Learning Rate: Higher learning rates (5e-4) reduced accuracy
