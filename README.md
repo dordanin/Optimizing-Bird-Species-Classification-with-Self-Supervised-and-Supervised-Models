@@ -60,19 +60,19 @@ The following sets of parameters were used to create the models:
 ## DINOv2 Results
 DINOv2 learning rate =  2.5e-4  
 
-![image](https://github.com/dordanin/assets/DINOV2_lr=2.5e-4.png)
-
+<img src="assets/DINOV2_lr=2.5e-4.png" width="600">
   
 DINOv2 learning rate =  2.5e-4 with dropout = 0.3 
  * Dropout: Slight negative effect on accuracy; results consistent with first figure
    
-![image](https://github.com/dordanin/assets/DINOV2_lr=2.5e-4_dropout.png)
 
+<img src="assets/DINOV2_lr=2.5e-4_dropout" width="600">
    
 DINOv2 learning rate =  5e-4 
  * Increased Learning Rate: Higher learning rates (5e-4) reduced accuracy
    
-![image](https://github.com/dordanin/assets/DINOV2_lr=5e-4.png)
+
+<img src="assets/DINOV2_lr=5e-4.png" width="600">
 
 Summary:
  * Best Performance: Schedule-free AdamW with >99% validation accuracy.
@@ -90,10 +90,10 @@ Summary:
   * Models without augmentations performed better than those with.
   * Default augmentations in YOLO reduced accuracy due to image erasure.
     
-![image](https://github.com/dordanin/assets/YOLOv8n-cls.png)
-![image](https://github.com/dordanin/assets/YOLOv8n-cls_dropout.png)
-![image](https://github.com/dordanin/assets/YOLOv8l-cls.png)
 
+<img src="assets/YOLOv8n-cls.png" width="600">
+<img src="assets/YOLOv8n-cls_dropout.png" width="600">
+<img src="assets/YOLOv8l-cls.png" width="600">
 
 # Conclusions
 DINOv2, a self-supervised learning model, achieved outstanding results, with the Schedule-free AdamW optimizer leading to a final accuracy exceeding 99%. This highlights the potential of self-supervised models in tasks requiring intricate feature extraction. The YOLOv8 model, while traditionally optimized for object detection, was fine-tuned for classification in this project. The model performed well using SGD as the optimizer, though it did not reach the accuracy levels achieved by DINOv2.
