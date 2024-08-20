@@ -1,7 +1,7 @@
-# Deep Learning - Spring - 00046211
-Dor Danino, Tal Polak - Spring 2024
+# Optimizing Bird Species Classification- Self-Supervised vs. Supervised Models
+<a href="https://github.com/dordanin">Dor Danino</a>, <a href="https://github.com/TalPol">Tal Polak</a> - Spring 2024
 
-
+Optimizing Bird Species Classification- Self-Supervised vs. Supervised Models
 # Project documentation
 ## Topics
 * Introduction
@@ -21,43 +21,62 @@ However, works measuring the performance of newer models, such as DINOv2 and YOL
 # Method
 In this section we’ll discuss the models, training, optimizers,  and hyperparameters.
 ## DINOv2 
-DINOv2 (self-DIstillation with NO labels v2) is an open-source self-supervised framework that leverages Vision Transformers. Developed by researchers at Meta, it was trained on 142 million unlabeled images. We used the DINOv2 large image classification model, which contains 300 million parameters, as a feature extractor and trained the last layer as a classification layer. Using this model, we trained a total of 55 different models, each utilizing a unique combination of parameters, optimizers, or augmentations.
+DINOv2 (self-DIstillation with NO labels v2) is an open-source self-supervised framework that leverages Vision Transformers. Developed by researchers at Meta, it was trained on 142 million unlabeled images. We used the DINOv2 large image classification model, which contains 300 million parameters, as a feature extractor and trained the last layer as a classification layer. Using this model, we trained a total of 57 different models, each utilizing a unique combination of parameters, optimizers, or augmentations.
 Each one of the models was trained with one of the following optimizers: SGD, Adam, AdamW, RMSProp, AdamN, AdamR, schedule free AdamW and, schedule free SGD. For each optimizer at least six models were trained, all training for 3 epochs.
 All optimizers used their default settings, excluding the learning rate.
 
-Data augmentations that changed the color of the image, or erased parts of it were not used, because we believed that they might make it physically impossible for the model to accurately classify the image, as they change or remove vital information for classification.
+The following sets of parameters were used to create the models:
+
+1. Learning rate of 2.5e-4, batch size of 256, no augmentations with full precision.
+2. Learning rate of 2.5e-4, batch size of 128, kornia augmentations, and automatic mixed precision.
+3. Learning rate of 2.5e-4, batch size of 256, dropout rate of 0.3, no augmentations, and automatic mixed precision.
+4. Learning rate of 2.5e-4, batch size of 64, dropout rate of 0.3, kornia augmentations, and automatic mixed precision.
+5. Learning rate of 5e-4, batch size of 128, no augmentations, and automatic mixed precision.
+6. Learning rate of 5e-4, batch size of 128,  kornia augmentations, and automatic mixed precision.
+
+The kornia augmentations used were:
+* RandomRotation of up to 45 degrees with a probability of 0.3.
+* RandomHorizantalFlip with a probability of 0.3.
+* RandomVerticalFlip with a probability of 0.3.
+* RandomAffine of up to 30 degrees with a probability of 0.3.
+
+
 ## YOLOv8
-YOLOv8 is the eighth version of YOLO (You Only Look Once), an open-source state-of-the-art model designed by Ultralytics. It is built on a CNN architecture and is tailored for various tasks, including object detection and tracking, instance segmentation, image classification, and pose estimation. The YOLOv8 image classification models were all trained on the ImageNet dataset, which contains over 14 million images across 1000 classes. We mainly used the YOLOv8n-cls model which has 2.7 million parameters, but we also tested the YOLOv8l-cls model which has 37.5 million parameters. Using transfer learning, we fine-tuned the models and created 46 different models, each using a different combination of parameters, optimizers, and augmentations.
+YOLOv8 is the eighth version of YOLO (You Only Look Once), an open-source state-of-the-art model designed by Ultralytics. It is built on a CNN architecture and is tailored for various tasks, including object detection and tracking, instance segmentation, image classification, and pose estimation. The YOLOv8 image classification models were all trained on the ImageNet dataset, which contains over 14 million images across 1000 classes. We mainly used the YOLOv8n-cls model which has 2.7 million parameters, but we also tested the YOLOv8l-cls model which has 37.5 million parameters. Using transfer learning, we fine-tuned the models and created 54 different models, each using a different combination of parameters, optimizers, and augmentations.
 Each one of the models was trained with one of the following optimizers: SGD, Adam, AdamW, RMSProp, AdamN, and AdamR. For each optimizer, at least 8 models were trained all training for 10 epochs. The models were trained using the Ultralytics library, using mainly the default settings, aside from those that were changed as parameters.
 
-The sets of parameters were used to create DINMOv2 and YOLOv8 models appear in the models parameters document.txt file 
+The following sets of parameters were used to create the models:
+1. Default learning rate and momentum, no augmentations using the YOLOv8n-cls model.
+2. Default learning rate and momentum, default augmentations using the YOLOv8n-cls model.
+3. Default learning rate and momentum, manual augmentations using the YOLOv8n-cls model.
+4. Default learning rate and momentum, no augmentations, dropout of 0.3 using the YOLOv8n-cls model.
+5. Default learning rate and momentum, default augmentations, dropout of 0.3 using the YOLOv8n-cls model.
+6. Default learning rate and momentum, no augmentations using the YOLOv8l-cls model.
+7. Default learning rate and momentum, default augmentations using the YOLOv8l-cls model.
+8. Default learning rate and momentum, manual augmentations using the YOLOv8l-cls model.
+
 
 # Results
 ## DINOv2 Results
 DINOv2 learning rate =  2.5e-4  
-* Schedule-free AdamW: Achieved >99% accuracy, outperforming all other optimizers.
-* SGD: Requires higher learning rates for improved accuracy. For example:
-  * Without augmentation: 1e-4 → 2.32% accuracy
-  * With augmentation: 2.5e-4 → 20.91%
-  * Schedule-free SGD: Best results with learning rates of 1e-3 and augmentation (73.49%).
 
-![image](https://github.com/user-attachments/assets/cd73df2c-73a1-4100-8d57-32ab54551f12)
+![image](https://github.com/dordanin/.../assets/DINOV2_lr=2.5e-4.png)
 
   
 DINOv2 learning rate =  2.5e-4 with dropout = 0.3 
- * Dropout: Slight positive effect on accuracy; results consistent with first figure
+ * Dropout: Slight negative effect on accuracy; results consistent with first figure
    
-![image](https://github.com/user-attachments/assets/99a92d59-0f38-41c9-aed8-c7b2d30f951f)
+![image](https://github.com/dordanin/.../assets/DINOV2_lr=2.5e-4_dropout.png)
 
    
 DINOv2 learning rate =  5e-4 
  * Increased Learning Rate: Higher learning rates (5e-4) reduced accuracy
    
-![image](https://github.com/user-attachments/assets/327b74f1-b71a-4628-9711-eddeeb9a7ed3)
+![image](https://github.com/dordanin/.../assets/DINOV2_lr=5e-4.png)
 
 Summary:
  * Best Performance: Schedule-free AdamW with >99% validation accuracy.
- * Effectiveness of AMP and Augmentations: Limited impact.
+ * Effectiveness of AMP and Augmentations: Limited negative impact.
  * Overall Performance: Most models achieved 95%+ validation accuracy
 
 ## YOLOv8  Results
@@ -71,9 +90,9 @@ Summary:
   * Models without augmentations performed better than those with.
   * Default augmentations in YOLO reduced accuracy due to image erasure.
     
-![image](https://github.com/user-attachments/assets/0aa87eb2-9c4e-464b-9f54-91cb9b62091d)
-![image](https://github.com/user-attachments/assets/395f5113-4ef3-4103-b6fc-4126cb1fa05c)
-![image](https://github.com/user-attachments/assets/313323f2-5b69-45cb-ab4e-06ae0727cf43)
+![image](https://github.com/dordanin/.../assets/YOLOv8n-cls.png)
+![image](https://github.com/dordanin/.../assets/YOLOv8n-cls_dropout.png)
+![image](https://github.com/dordanin/.../assets/YOLOv8l-cls.png)
 
 
 # Conclusions
@@ -85,30 +104,68 @@ In future work, further exploration into the performance of additional optimizer
 
 Overall, this study underscores the strengths of both DINOv2 and YOLOv8, while also highlighting the importance of tailoring training strategies to specific model architectures and tasks.
 
+ 
+ ## Prerequisites
+
+| Library                  | Why                                                             |
+|--------------------------|-----------------------------------------------------------------|
+| `matplotlib`             | Plotting and visualization                                      |
+| `time`                   | Time-related functions                                          |
+| `os`                     | Operating system interface                                      |
+| `copy`                   | Shallow and deep copy operations                                |
+| `PIL`                    | Python Imaging Library for image processing                     |
+| `cv2`                    | OpenCV library for computer vision tasks                        |
+| `pandas`                 | Data manipulation and analysis                                  |
+| `torch`                  | Deep learning framework                                         |
+| `torchvision`            | Datasets and transformations for vision tasks                   |
+| `kornia`                 | Differentiable computer vision library for PyTorch              |
+| `tqdm`       			   | A fast, extensible progress bar for python						 |
+| `xformers`               | Toolbox to Accelerate Research on Transformers                  |
+| `ultralytics`            | Package for the YOLOv8 model                                    |
+| `schedulefree`           | Package for Schedule-free optimizers                            |
+
+
+
+## Datasets
+| Dataset           | Notes                         | Link                                                                                							|
+|-------------------|------------------------------------|----------------------------------------------------------------------------------------------------------|
+| BIRDS 525 SPECIES- IMAGE CLASSIFICATION  | The dataset is not available in this repository, please download it from the link | [Kaggle](https://www.kaggle.com/datasets/gpiosenka/100-bird-species/) |
+
+## Repository Organization
+
+| Directory name                                            | Content                                                                                				|
+|------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
+| `/assets`                                            | directory for assets (images, etc.)                       			           				 				|
+| `/docs`                                              | various documentation files                                                                 				|
+| `/notebooks`                                         | Jupyter Notebooks used for training and evaluation                                          				|
+| `/models`                                            | folder for saved models using .pth files, due to space constraints we couldn't put any of our models there |
+| `/dataset`                                           | directory for the dataset                                                                   				|
+| `requirements.txt`                                   | requirements file for `pip`                                                                 				|
+
+## Notebooks list
+See list of sets above at DINOv2 and YOLOv8 sections.
+
+| File name                                            | Content                                                                                     				|
+|------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
+| `/notebooks/Dino_lr2.5e-4.ipnyb`                     | notebook for first and second DINOv2 model sets                                             				|
+| `/notebooks/Dino_lr2.5e-4_dropout.ipnyb`             | notebook for third and fourth DINOv2 model sets                                             				|
+| `/notebooks/Dino_lr5e-4.ipnyb`                       | notebook for fifth and sixth DINOv2 model sets                                              				|
+| `/notebooks/YOLOv8n.ipnyb`                           | notebook for first, second and third YOLOv8 model sets                                     				|
+| `/notebooks/YOLOv8n_dropout.ipnyb`                   | notebook for fourth and fifth YOLOv8 model sets                                             				|
+| `/notebooks/YOLOv8l.ipnyb`                           | notebook for sixth, seventh and eighth YOLOv8 model sets                                    				|
+
 # How to run
-1) Download the data set: https://www.kaggle.com/datasets/gpiosenka/100-bird-species/data
-2) Download the python files from this page
-3) Add the location of the train , test and val folders that you download in 1 to train_set , val_set and test_set parameters in the code
-4) Run the the python files , this will train all the models combinations
+1) Clone the git repository.
+2) Install the required dependencies:
+	```bash
+    pip install -r requirements.txt
+    ```
+3) Download the data set: https://www.kaggle.com/datasets/gpiosenka/100-bird-species/data, and extract the files in the `/dataset/` folders.
+4) IMPORTANT: Rename the valid directory to val, i.e., change "./dataset/valid" to "./dataset/val".
+5) Use the provided notebooks.
 
-To use the best weights we found, you can download the weights file on this page and use it according the instructions:
-
-For using YOLOv8 model, run:
-
-`!pip install ultralytics`
-
-`from ultralytics import YOLO`
-
-`model = YOLO("yolov8n-cls.pt")  # load an official model`
-
-`model = YOLO("path/to/best.pt")  # load our custom model`
-
-`results = model("your_image.jpg")  # predict on an image`
-
- Using DINOv2 model : use the python file "" provide in this page 
 
 # Ethics Statement
-The explanations of ChatGPT:
 
 stakeholders that will be affected by the project:
 * Data Scientists/Researchers - who are developing and testing models for fine-grained image classification.
@@ -120,6 +177,10 @@ The explanation that is given to each stakeholder:
 * Conservationists/Bird Enthusiasts: This technology allows accurate identification of bird species, even those that look similar, by training AI models on a large dataset of bird images. It could assist in ecological research and help track bird populations for conservation efforts.
 * Technology Companies: The models developed in this project could be used to improve wildlife tracking and monitoring systems or be integrated into consumer-facing applications like mobile apps for bird watching, offering accurate, real-time species identification.
 
-ChatGPT explanations should emphasize the ethical considerations of AI use, particularly the potential biases in training data. For example, when explaining the project to stakeholders, it’s important to note that the dataset might not cover all species equally, potentially resulting in biased or incomplete identification results. It’s also crucial to ensure that the technology is used responsibly, especially in conservation and wildlife monitoring, to avoid harm to ecosystems or misinterpretation of results. Transparency around limitations should be included to ensure ethical use.
 
 
+References
+[1] BIRDS 525 data set: https://www.kaggle.com/datasets/gpiosenka/100-bird-species/data
+[2] DINOv2 Github: https://github.com/facebookresearch/dinov2
+[3] YOLO v8: https://docs.ultralytics.com/models/yolov8/ 
+[4] Aaron Defazio and Xingyu Alice Yang and Harsh Mehta and Konstantin Mishchenko and Ahmed Khaled and Ashok Cutkosky. The Road Less Scheduled. https://arxiv.org/abs/2405.15682 
