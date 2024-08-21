@@ -183,7 +183,8 @@ The explanation that is given to each stakeholder:
 
 
 
-References
+#References
+
 [1] BIRDS 525 data set: https://www.kaggle.com/datasets/gpiosenka/100-bird-species/data
 
 [2] DINOv2 Github: https://github.com/facebookresearch/dinov2
