@@ -163,7 +163,7 @@ See list of sets above at DINOv2 and YOLOv8 sections.
 3) Download the data set: https://www.kaggle.com/datasets/gpiosenka/100-bird-species/data, and extract the files in the `/dataset/` folders.
 4) IMPORTANT: Rename the valid directory to val, i.e., change "./dataset/valid" to "./dataset/val".
 5) Use the provided notebooks.
-
+NOTE: Due to space constraints we couldn't put any of our models in the repository, so you'll have to train your own models. 
 
 # Ethics Statement
 
