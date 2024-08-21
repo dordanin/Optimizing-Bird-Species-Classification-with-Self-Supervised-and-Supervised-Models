@@ -156,10 +156,14 @@ See list of sets above at DINOv2 and YOLOv8 sections.
 
 # How to run
 1) Clone the git repository.
-2) Install the required dependencies:
+2) Use the environment file to create an environment with the required packages:
 	```bash
-    pip install -r requirements.txt
+    conda env create -f environment.yml
     ```
+	And activate the environment using:
+	```bash
+	conda activate optimizing_bird_classification
+	```
 3) Download the data set: https://www.kaggle.com/datasets/gpiosenka/100-bird-species/data, and extract the files in the `/dataset/` folders.
 4) IMPORTANT: Rename the valid directory to val, i.e., change "./dataset/valid" to "./dataset/val".
 5) Use the provided notebooks.
