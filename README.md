@@ -185,6 +185,9 @@ The explanation that is given to each stakeholder:
 
 References
 [1] BIRDS 525 data set: https://www.kaggle.com/datasets/gpiosenka/100-bird-species/data
+
 [2] DINOv2 Github: https://github.com/facebookresearch/dinov2
+
 [3] YOLO v8: https://docs.ultralytics.com/models/yolov8/ 
+
 [4] Aaron Defazio and Xingyu Alice Yang and Harsh Mehta and Konstantin Mishchenko and Ahmed Khaled and Ashok Cutkosky. The Road Less Scheduled. https://arxiv.org/abs/2405.15682 
